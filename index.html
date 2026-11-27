@@ -195,23 +195,27 @@ footer { padding: 28px 0 8px; color: var(--muted); font-size: 14px; }
     { key: 'classic', label: 'Классика' },
     { key: 'modern', label: 'Современный стиль' },
     { key: 'bath', label: 'Санузлы' },
-    { key: 'floor', label: 'Полы и коммуникации' }
+    { key: 'floor', label: 'Полы и коммуникации' },
+    { key: 'eng', label: 'Сантехника и коллекторы' }
   ];
   var ALT = {
     classic: 'Интерьер с молдингами, лепниной и паркетом после ремонта',
     modern: 'Современный интерьер со световыми линиями и паркетом после ремонта',
     bath: 'Ванная комната после ремонта с крупноформатной плиткой',
-    floor: 'Мраморные полы и инженерные системы после ремонта'
+    floor: 'Мраморные полы и инженерные системы после ремонта',
+    eng: 'Коллекторный узел водоснабжения с фильтрами и защитой от протечек'
   };
   var COUNTS = { classic: 13, modern: 14, bath: 9, floor: 4 };
+  var EXTRA = {bath: ['41', '42', '46', '48', '50', '51'], eng: ['43', '44', '45', '47', '49']};
   var PHOTOS = [];
   var n = 0;
-  ['classic', 'modern', 'bath', 'floor'].forEach(function (k) {
-    for (var i = 0; i < COUNTS[k]; i++) {
+  ['classic', 'modern', 'bath', 'floor', 'eng'].forEach(function (k) {
+    for (var i = 0; i < (COUNTS[k] || 0); i++) {
       n++;
       var id = (n < 10 ? '0' : '') + n;
       PHOTOS.push({ id: id, cat: k });
     }
+    (EXTRA[k] || []).forEach(function (id) { PHOTOS.push({ id: id, cat: k }); });
   });
 
   var grid = document.getElementById('grid');
